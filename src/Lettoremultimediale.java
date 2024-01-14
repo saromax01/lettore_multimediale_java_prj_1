@@ -2,6 +2,8 @@ import it.epicode.be.classiconcrete.Audio;
 import it.epicode.be.classiconcrete.Immagine;
 import it.epicode.be.classiconcrete.Video;
 import it.epicode.be.elementomultimedialeastratto.ElementoMultimediale;
+import it.epicode.be.enterface.RegolazioneLuminosa;
+import it.epicode.be.enterface.RegolazioneVolume;
 
 import java.util.Scanner;
 
@@ -54,10 +56,45 @@ public class Lettoremultimediale {
                     break;
                 }
                 if (sceltaEsecuzione >= 1 && sceltaEsecuzione <= 5 ) {
-                    eseguiElemento(elementi[sceltaEsecuzione -1]);
+                    ElementoMultimediale elementoScelto = elementi[sceltaEsecuzione -1];
+                    System.out.println("Elemento in Esecuzione...1");
+                    eseguiElemento(elementoScelto);
 
-                } else {
-                    System.out.println("numero non valido. Riprova");
+                    if (elementoScelto instanceof RegolazioneLuminosa) {
+                        System.out.println("Vuoi cambiare la Luminosità? ( 1 alza, 2 abbassa, 3 avanti)");
+                        int sceltaLumos = scanner2.nextInt();
+                        if (sceltaLumos == 1) {
+                            ((RegolazioneLuminosa) elementoScelto).alzaLuminosita();
+                        } else if (sceltaLumos == 2) {
+                            ((RegolazioneLuminosa) elementoScelto).abbassaLuminosita();
+                        } else if (sceltaLumos == 3) {
+                            System.out.println(" avanti...");
+                        }
+                        else {
+                            System.out.println("scelta non valida!");
+                        }
+                }
+                    if (elementoScelto instanceof RegolazioneVolume) {
+                        System.out.println("Vuoi abbassare o alzare il volume? (1 alza, 2 abbassa, 3 avanti) ");
+                        int sceltaVolume = scanner2.nextInt();
+                        if (sceltaVolume == 1) {
+                            ((RegolazioneVolume) elementoScelto).alzaVolume();
+                            System.out.println("elemento modificato con successo!, eseguilo per vederne le modifiche applicate.");
+                        }
+                        else if (sceltaVolume == 2) {
+                            ((RegolazioneVolume) elementoScelto).abbassaVolume();
+                            System.out.println("elemento modificato con successo!, eseguilo per vederne le modifiche applicate.");
+                        } else if (sceltaVolume == 3) {
+                            System.out.println("avanti...");
+                            System.out.println("elemento modificato con successo!, eseguilo per vederne le modifiche applicate.");
+                        }
+                        else {
+                            System.out.println("scelta non valida!");
+                        }
+                    }
+                    else {
+                        System.out.println("numero non valido, si prega di riprovare.");
+                    }
 
                 }
 
